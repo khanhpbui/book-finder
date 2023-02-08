@@ -4,19 +4,19 @@ const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
-    users: async () => {
-      return User.find().populate("books");
-    },
-    user: async (parent, { username }) => {
-      return User.findOne({ username }).populate("books");
-    },
-    book: async (parent, { bookId }) => {
-      return Book.findOne({ _id: bookId });
-    },
-    books: async (parent, { username }) => {
-      const params = username ? { username } : {};
-      return Book.find(params);
-    },
+    // users: async () => {
+    //   return await User.find().populate("books");
+    // },
+    // user: async (parent, { username }) => {
+    //   return await User.findOne({ username }).populate("books");
+    // },
+    // book: async (parent, { bookId }) => {
+    //   return await Book.findOne({ _id: bookId });
+    // },
+    // books: async (parent, { username }) => {
+    //   const params = username ? { username } : {};
+    //   return await Book.find(params);
+    // },
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate("books");
@@ -25,14 +25,12 @@ const resolvers = {
     },
   },
   Mutation: {
-    getSingleUser: async (parent, { id, username }) => {
-      return await User.findOne({
-        $or: [{ _id: id }, { username }],
-      });
-    },
-    createUser: async (parent, { username, email, password }) => {
+    addUser: async (parent, { username, email, password }) => {
+      console.log("hello");
       const user = await User.create({ username, email, password });
+      console.log(user);
       const token = signToken(user);
+      console.log(token);
       return { token, user };
     },
     login: async (parent, { email, password }) => {
@@ -51,6 +49,26 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
+    },
+    saveBook: async (parent, { bookInfo }, context) => {
+      if (context.user) {
+        return await User.findOneAndUpdate(
+          { id: context.user._id },
+          { $addToSet: { savedBooks: bookInfo } },
+          { new: true, runValidators: true }
+        );
+      }
+      throw new AuthenticationError("Need to be logged in");
+    },
+    removeBook: async (parent, { bookId }, context) => {
+      if (context.user) {
+        return await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { savedBooks: { bookId } } },
+
+          { new: true }
+        );
+      }
     },
   },
 };

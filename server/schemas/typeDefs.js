@@ -1,17 +1,15 @@
 const { gql } = require("apollo-server-express");
-
+// to show the frontend... dont show password
 const typeDefs = gql`
   type User {
     _id: ID!
     username: String!
     email: String!
     bookCount: Int
-    password: String!
     savedBooks: [Book]
   }
 
   type Book {
-    _id: ID!
     bookId: String!
     authors: String
     description: String!
@@ -26,19 +24,32 @@ const typeDefs = gql`
   }
 
   type Query {
-    users: [User]
-    user(username: String!): User
-    books(username: String): [Book]
-    book(bookId: ID): Book
     me: User
   }
-
+  input infoBook {
+    bookId: String!
+    authors: String
+    description: String!
+    title: String!
+    image: String
+    link: String
+  }
   type Mutation {
-    getSingleUser(userId: ID, username: String): User
-    createUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    saveBook()
+    addUser(username: String!, email: String!, password: String!): Auth
+    saveBook(bookInfo: infoBook): User
+    removeBook(bookId: String!): User
   }
 `;
 
 module.exports = typeDefs;
+// Mutation
+
+// users: [User]
+// user(username: String!): User
+// books(username: String): [Book]
+// book(bookId: ID): Book
+
+// just a SCHEMA.. check model
+// queries are things info getting back
+// mutation to edit the datatbase
