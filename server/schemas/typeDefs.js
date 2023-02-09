@@ -11,7 +11,7 @@ const typeDefs = gql`
 
   type Book {
     bookId: String!
-    authors: String
+    authors: [String]
     description: String!
     title: String!
     image: String
@@ -26,9 +26,9 @@ const typeDefs = gql`
   type Query {
     me: User
   }
-  input infoBook {
+  input InfoBook {
     bookId: String!
-    authors: String
+    authors: [String]
     description: String!
     title: String!
     image: String
@@ -37,19 +37,18 @@ const typeDefs = gql`
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    saveBook(bookInfo: infoBook): User
+    saveBook(input: InfoBook): User
     removeBook(bookId: String!): User
   }
 `;
 
 module.exports = typeDefs;
-// Mutation
-
+//when to include these????
 // users: [User]
 // user(username: String!): User
 // books(username: String): [Book]
 // book(bookId: ID): Book
 
-// just a SCHEMA.. check model
-// queries are things info getting back
-// mutation to edit the datatbase
+// Book is just a SCHEMA.. check model...don't need _id??
+// queries are info getting back
+// mutation to edit the datatbase (update, delete)

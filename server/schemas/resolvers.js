@@ -50,11 +50,11 @@ const resolvers = {
 
       return { token, user };
     },
-    saveBook: async (parent, { bookInfo }, context) => {
+    saveBook: async (parent, { input }, context) => {
       if (context.user) {
         return await User.findOneAndUpdate(
           { id: context.user._id },
-          { $addToSet: { savedBooks: bookInfo } },
+          { $addToSet: { savedBooks: input } },
           { new: true, runValidators: true }
         );
       }
@@ -69,6 +69,8 @@ const resolvers = {
           { new: true }
         );
       }
+      throw new AuthenticationError("Need to be logged in");
     },
   },
 };
+module.exports = resolvers;
