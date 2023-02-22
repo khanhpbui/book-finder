@@ -1,8 +1,6 @@
 # book-finder
 
 
-
-
 ## Description
 
 This application was built using the MERN stack with a React front end, MongoDB database, Node.js/Express.js server, and third party Google Book API. It also implements JSON Web Tokens (JWT) for user authentication. User will be able to sign up for an account, login, search for books, and save book searches to the back end. 
@@ -24,7 +22,7 @@ Click [HERE](https://drive.google.com/file/d/1defoxPiyOZAgM3VugRPqkJu-hIMPrhHS/v
 - [Description](#description)
 - [Installation](#installation)
 - [Technologies](#technologies)
-- [User Story](#usage)
+- [User Story](#user-story)
 - [Acceptance Criteria](#acceptance-criteria)
 - [License](#license)
 - [Questions](#questions)
