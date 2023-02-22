@@ -29,8 +29,8 @@ const typeDefs = gql`
   input InfoBook {
     bookId: String!
     authors: [String]
-    description: String!
-    title: String!
+    description: String
+    title: String
     image: String
     link: String
   }
@@ -50,5 +50,5 @@ module.exports = typeDefs;
 // book(bookId: ID): Book
 
 // Book is just a SCHEMA.. check model...don't need _id??
-// queries are info getting back
+// queries are info getting back - READ data
 // mutation to edit the datatbase (update, delete)

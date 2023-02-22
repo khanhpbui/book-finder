@@ -6,6 +6,14 @@ query me {
       _id
       email
       username
+      savedBooks {
+        bookId
+        authors
+        image
+        title
+        link
+        description
+      }
     }
   }
   
