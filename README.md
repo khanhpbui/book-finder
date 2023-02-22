@@ -14,7 +14,7 @@ This application was built using the MERN stack with a React front end, MongoDB 
 <br><br>
 <img src="./client/public/pic4.png" alt="screeenshot" width="550px" height="400px">
 <br><br>
-Click [HERE](https://drive.google.com/file/d/1defoxPiyOZAgM3VugRPqkJu-hIMPrhHS/view) to view a full video demonstrating a walkthrough of how to run the application.
+Click [HERE](https://google-book-search.herokuapp.com/) to view the deployed application on Heroku.
 
     
 ## Table of Contents
